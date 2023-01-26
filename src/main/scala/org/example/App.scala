@@ -15,8 +15,8 @@ import org.apache.spark.sql.expressions.Window.partitionBy
 
 object NewDay {
 
-  System.setProperty("hadoop.home.dir", "C:\\Users\\alway\\IdeaProjects\\Hadoop\\hadoop-3.2.1\\hadoop-3.0.0")
-  
+  System.setProperty("hadoop.home.dir", "C:\\Users\\alway\\IdeaProjects\\Hadoop\\hadoop-3.2.1\\hadoop-2.7.1\\bin")
+
   def main(args : Array[String]) {
     val spark = SparkSession.builder()
     .master("local")
@@ -74,7 +74,7 @@ object NewDay {
       .mode("overwrite")
       .save()//AsTable("movies")
 
-    /*ratings.write
+      ratings.write
       .option("path", "C:\\Users\\alway\\IdeaProjects\\data\\output\\ratings\\")
       .format("parquet")
       .mode("overwrite")
@@ -84,7 +84,7 @@ object NewDay {
       .option("path", "C:\\Users\\alway\\IdeaProjects\\data\\output\\userRatings\\")
       .format("parquet")
       .mode("overwrite")
-      .save() //AsTable("movies")*/
+      .save() //AsTable("movies")
   }
 
 }
