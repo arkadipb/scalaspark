@@ -62,6 +62,8 @@ object NewDay {
     movieRatings.show()
 
     val userRatings = moviesRenamed.join(ratingsRenamed, Seq("movie_id"))
+      .groupBy("movie_id","title","genre","user_id","rating")
+      .agg(max("timestamp").as("timestamp"))
       .withColumn("row_num", row_number.over(partitionBy("user_id").orderBy(col("rating").desc, col("timestamp"))))
       .filter(col("row_num") <= 3)
 
@@ -70,18 +72,28 @@ object NewDay {
 
     movies.write
       .option("path","C:\\Users\\alway\\IdeaProjects\\data\\output\\movies\\")
+      .option("header",true)
       .format("parquet")
       .mode("overwrite")
       .save()//AsTable("movies")
 
       ratings.write
       .option("path", "C:\\Users\\alway\\IdeaProjects\\data\\output\\ratings\\")
+        .option("header",true)
+      .format("parquet")
+      .mode("overwrite")
+      .save() //AsTable("movies")
+
+    movieRatings.write
+      .option("path", "C:\\Users\\alway\\IdeaProjects\\data\\output\\movieRatings\\")
+      .option("header", true)
       .format("parquet")
       .mode("overwrite")
       .save() //AsTable("movies")
 
     userRatings.write
       .option("path", "C:\\Users\\alway\\IdeaProjects\\data\\output\\userRatings\\")
+      .option("header",true)
       .format("parquet")
       .mode("overwrite")
       .save() //AsTable("movies")
