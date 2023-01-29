@@ -1,0 +1,8 @@
+spark-submit \
+  --deploy-mode client \
+  --master yarn \
+  --driver-memory 1g \
+  --executor-memory 1g \
+  --executor-cores 5  \
+  --class org.example.App \
+  C:\Users\alway\IdeaProjects\scalaspark\target\scalaspark-1.0-SNAPSHOT.jar
