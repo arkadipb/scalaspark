@@ -24,7 +24,7 @@ object NewDay {
       .agg(
         min("rating").as("min_rating"),
         max("rating").as("max_rating"),
-        avg("rating").as("avg_rating")
+        round(avg("rating"), 3).as("avg_rating")
       )
 
     movieRatings.show()
@@ -91,21 +91,21 @@ object NewDay {
         .option("header",true)
       .format("parquet")
       .mode("overwrite")
-      .saveAsTable("movies")
+      .saveAsTable("ratings")
 
     movieRatings.write
       .option("path", "C:\\Users\\alway\\IdeaProjects\\data\\output\\movieRatings\\")
       .option("header", true)
       .format("parquet")
       .mode("overwrite")
-      .saveAsTable("movies")
+      .saveAsTable("movieRatings")
 
     userRatings.write
       .option("path", "C:\\Users\\alway\\IdeaProjects\\data\\output\\userRatings\\")
       .option("header",true)
       .format("parquet")
       .mode("overwrite")
-      .saveAsTable("movies")
+      .saveAsTable("userRatings")
   }
 
 }
